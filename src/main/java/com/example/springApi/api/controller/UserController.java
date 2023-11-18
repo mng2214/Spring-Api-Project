@@ -36,16 +36,15 @@ public class UserController {
 //            User.ErrorResponse errorResponse = new User.ErrorResponse(errorMsg, id);
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 //        }
-        return (user.isPresent()) ? ResponseEntity.ok(user.get()) : ResponseEntity.status(HttpStatus.NOT_FOUND).body(new User.ErrorResponse("User not found", id));
-
+        return (user.isPresent()) ?
+                ResponseEntity.ok(user.get()) :
+                ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new User.ErrorResponse("User not found", id));
     }
 
     @GetMapping("/allusers")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-
-
-
 
 }

@@ -2,7 +2,7 @@ package com.example.springApi.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.jetbrains.annotations.Nullable;
+
 
 @Data
 @AllArgsConstructor
