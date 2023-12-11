@@ -30,7 +30,7 @@ class ApiApplicationTests {
         });
         Assertions.assertEquals(20, users.size());
 
-        users.stream().map( q->q.getId()).forEach(System.out::println);
+        users.stream().map(GetUsersResponse::getId).forEach(System.out::println);
     }
 
     @Test

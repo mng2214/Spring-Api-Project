@@ -15,12 +15,9 @@ public class UserService {
 
     // build 20 random users
     public UserService() {
-
-        Date date = new Date();
         userList = new ArrayList<>();
-        for (int i = 0; i < 19; i++) {
-            userList.add(UserBuilder.buildUser());
-        }
+        Date date = new Date();
+
         userList.add(new User(
                 1,
                 "Artur",
@@ -32,22 +29,16 @@ public class UserService {
                         "60000",
                         "USA"),
                 String.valueOf(date.getTime())));
+
+        for (int i = 0; i < 19; i++) {
+            userList.add(UserBuilder.buildUser());
+        }
+
     }
 
     public List<User> getAllUsers() {
         return userList;
     }
-
-//    public Optional<User> getUserIF(Integer id) {
-//        Optional<User> optional = Optional.empty();
-//        for (User user: userList) {
-//            if(id == user.getId()){
-//                optional = Optional.of(user);
-//                return optional;
-//            }
-//        }
-//        return optional;
-//    }
 
     public Optional<User> getUser(Integer id) {
         return userList.stream().filter(user -> id.equals(user.getId())).findFirst();
