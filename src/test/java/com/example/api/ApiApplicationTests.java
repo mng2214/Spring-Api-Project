@@ -48,8 +48,14 @@ class ApiApplicationTests {
                 .then().spec(resSpec())
                 .extract().response();
 
-        List<GetUsersResponse> users = mapper.readValue(response.getBody().asString(), new TypeReference<>() {});
+       List<GetUsersResponse> users = mapper.readValue(response.getBody().asString(), new TypeReference<>() {});
+
         Assertions.assertEquals(20, users.size());
+
+        users.stream().map(GetUsersResponse::getEmail).forEach(System.out::println);
+        System.out.println("\n\n");
+        users.stream().map(GetUsersResponse::getEmail).filter(email -> email.contains("@hotmail")).forEach(System.out::println);
+
 
 
     }
