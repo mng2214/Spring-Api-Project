@@ -54,6 +54,7 @@ class ApiApplicationTests {
 
         users.stream().map(GetUsersResponse::getEmail).forEach(System.out::println);
         System.out.println("\n\n");
+
         users.stream().map(GetUsersResponse::getEmail).filter(email -> email.contains("@hotmail")).forEach(System.out::println);
 
 
