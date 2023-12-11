@@ -7,17 +7,18 @@ import com.github.javafaker.service.RandomService;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserBuilder {
 
     public static Faker faker = new Faker();
     public static Random random = new Random();
+
     public static User buildUser() {
+        int id = 1;
         return new User(
-                faker.random().nextInt(1, 50),
+                ++id,
                 faker.name().fullName(),
                 random.nextInt(65),
                 faker.internet().emailAddress(),
