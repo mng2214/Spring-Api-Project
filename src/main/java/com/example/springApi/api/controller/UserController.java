@@ -26,6 +26,7 @@ public class UserController {
 //        return user.orElse(null);
 //    }
 
+    // get call by id
     @GetMapping("/user")
     public ResponseEntity<Object> getUser(@RequestParam Integer id) {
         Optional<User> user = userService.getUser(id);
@@ -42,6 +43,7 @@ public class UserController {
                         .body(new User.ErrorResponse("User not found", id));
     }
 
+    //get call list of users
     @GetMapping("/allusers")
     public List<User> getAllUsers() {
         return userService.getAllUsers();

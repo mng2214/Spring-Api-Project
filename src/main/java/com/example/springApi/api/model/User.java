@@ -3,7 +3,6 @@ package com.example.springApi.api.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
 @Data
 @AllArgsConstructor
 public class User {
@@ -18,7 +17,6 @@ public class User {
     @Data
     @AllArgsConstructor
     public static class Address {
-
         private String street;
         private String city;
         private String zip;
@@ -27,7 +25,6 @@ public class User {
     @Data
     @AllArgsConstructor
     public static class ErrorResponse {
-
         private String errorMsg;
         private Integer id;
     }
