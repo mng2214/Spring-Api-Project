@@ -2,13 +2,9 @@ package com.example.springApi.service;
 
 import com.example.springApi.api.model.User;
 import com.github.javafaker.Faker;
-import com.github.javafaker.service.FakeValuesService;
-import com.github.javafaker.service.RandomService;
-
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class UserBuilder {
 
