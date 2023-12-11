@@ -29,6 +29,8 @@ class ApiApplicationTests {
         List<GetUsersResponse> users = mapper.readValue(response.getBody().asString(), new TypeReference<>() {
         });
         Assertions.assertEquals(20, users.size());
+
+        users.stream().map( q->q.getId()).forEach(System.out::println);
     }
 
     @Test

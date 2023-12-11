@@ -12,15 +12,14 @@ public class UserBuilder {
     public static Random random = new Random();
 
     public static User buildUser() {
-        int id = 1;
         return new User(
-                ++id,
                 faker.name().fullName(),
                 random.nextInt(65),
                 faker.internet().emailAddress(),
                 buildAddress(),
                 new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()));
     }
+
 
     public static User.Address buildAddress() {
         return new User.Address(

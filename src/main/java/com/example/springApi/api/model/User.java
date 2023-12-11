@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class User {
 
+    private static int idCounter = 1;
+
     private int id;
     private String name;
     private int age;
@@ -23,5 +25,13 @@ public class User {
         private String country;
     }
 
+    public User( String name, int age, String email, Address address, String timestamp) {
+        this.id = ++idCounter;
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.address = address;
+        this.timestamp = timestamp;
+    }
 }
 

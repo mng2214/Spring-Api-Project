@@ -15,12 +15,14 @@ public class UserService {
 
     // build 20 random users
     public UserService() {
+
         Date date = new Date();
         userList = new ArrayList<>();
         for (int i = 0; i < 19; i++) {
             userList.add(UserBuilder.buildUser());
         }
-        userList.add(new User(1,
+        userList.add(new User(
+                1,
                 "Artur",
                 30,
                 "artur@mail.com",
