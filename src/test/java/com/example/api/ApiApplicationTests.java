@@ -14,7 +14,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import static org.hamcrest.Matchers.lessThan;
+
 import java.util.List;
 
 
@@ -31,7 +33,6 @@ class ApiApplicationTests {
 
     public static ResponseSpecification resSpec() {
         return new ResponseSpecBuilder()
-                .expectStatusCode(200)
                 .expectContentType(ContentType.JSON)
                 .log(LogDetail.ALL)
                 .expectResponseTime(lessThan(5000L))
@@ -39,29 +40,31 @@ class ApiApplicationTests {
     }
 
     @Test
-    void testAllUsers() throws JsonProcessingException {
+    void testAllUsersPositive() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         Response response = RestAssured
                 .given(reqSpec)
                 .get("/allusers")
                 .then().spec(resSpec())
+                .statusCode(200)
                 .extract().response();
-
-       List<GetUsersResponse> users = mapper.readValue(response.getBody().asString(), new TypeReference<>() {});
-
+        List<GetUsersResponse> users = mapper.readValue(response.getBody().asString(), new TypeReference<>() {
+        });
         Assertions.assertEquals(20, users.size());
-
-        users.stream().map(GetUsersResponse::getEmail).forEach(System.out::println);
-        System.out.println("\n\n");
-
-        users.stream()
-                .map(GetUsersResponse::getEmail)
-                .filter(email -> email.contains("@hotmail"))
-                .forEach(System.out::println);
-
-
-
     }
+
+    @Test
+    void testAllUsersNegative() {
+
+        RestAssured
+                .given(reqSpec)
+                .param("id", "2")
+                .get("/user")
+                .then().spec(resSpec())
+                .statusCode(404)
+                .extract().response();
+    }
+
 
 }

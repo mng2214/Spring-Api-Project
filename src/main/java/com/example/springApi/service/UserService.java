@@ -19,17 +19,17 @@ public class UserService {
         userList = new ArrayList<>();
         for (int i = 0; i < 19; i++) {
             userList.add(UserBuilder.buildUser());
-            userList.add(new User(1,
-                    "Artur",
-                    30,
-                    "artur@mail.com",
-                    new User.Address(
-                            "123 Main",
-                            "Chicago",
-                            "60000",
-                            "USA"),
-                    String.valueOf(date.getTime())));
         }
+        userList.add(new User(1,
+                "Artur",
+                30,
+                "artur@mail.com",
+                new User.Address(
+                        "123 Main",
+                        "Chicago",
+                        "60000",
+                        "USA"),
+                String.valueOf(date.getTime())));
     }
 
     public List<User> getAllUsers() {
