@@ -22,11 +22,14 @@ public class User {
         private String zip;
         private String country;
     }
+
     @Data
     @AllArgsConstructor
     public static class ErrorResponse {
-        private String errorMsg;
-        private Integer id;
+        private String message;
+        private Integer userId;
+
+        // Getters (and possibly setters, depending on your requirements)
     }
 }
 
