@@ -27,8 +27,13 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity<ApiResponse> getUser(@RequestParam Integer id) {
         Optional<User> user = userService.getUser(id);
-        return user.map(value -> ResponseEntity.ok(new ApiResponse(value))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return user.map(value -> ResponseEntity
+                .ok(new ApiResponse(value)))
+                .orElseGet(() -> ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
                 .body(new ApiResponse("User not found")));
+
+        // test
     }
 
 
