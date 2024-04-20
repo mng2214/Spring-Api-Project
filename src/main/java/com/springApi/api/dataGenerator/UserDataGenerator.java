@@ -32,7 +32,7 @@ public class UserDataGenerator extends RandomData implements CommandLineRunner {
                     .age(random.nextInt(100))
                     .email(faker.internet().emailAddress())
                     .address(address)
-                    .dateCreated(randomTimestamp).build();
+                    .dateCreated(randomTimestamp()).build();
 
             userService.save(user);
         }
