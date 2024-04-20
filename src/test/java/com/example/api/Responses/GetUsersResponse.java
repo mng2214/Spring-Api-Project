@@ -2,6 +2,8 @@ package com.example.api.Responses;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class GetUsersResponse {
     private int id;
@@ -9,7 +11,7 @@ public class GetUsersResponse {
     private int age;
     private String email;
     private Address address;
-    private String timestamp;
+    private String dateCreated;
 
     @Data
     public static class Address {

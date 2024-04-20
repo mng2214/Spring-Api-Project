@@ -16,7 +16,7 @@ public class User {
     private int age;
     private String email;
     private Address address;
-    private LocalDateTime dateCreated;
+    private String dateCreated;
 
 }
 

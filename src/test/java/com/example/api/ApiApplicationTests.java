@@ -13,37 +13,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+
 //@SpringBootTest
 class ApiApplicationTests {
 
     @Test
     void testAllUsersPositive() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
 
         Response response = RestAssured
                 .given(ReqSpec.reqSpec)
-                .get("/allusers")
+                .get("/user/all")
                 .then().spec(ResSpec.resSpec())
-                .statusCode(200)
                 .extract().response();
-        List<GetUsersResponse> users = mapper.readValue(response.getBody().asString(), new TypeReference<>() {
-        });
-        Assertions.assertEquals(20, users.size());
 
-        users.stream().map(GetUsersResponse::getId).forEach(System.out::println);
+        List<GetUsersResponse> users = new ObjectMapper()
+                .readValue(response.getBody()
+                        .asString(), new TypeReference<>() {
+        });
+        Assertions.assertEquals(10, users.size());
+
+        //  users.stream().map(GetUsersResponse::getId).forEach(System.out::println);
     }
 
     @Test
-    void testAllUsersNegative() {
-
-        RestAssured
-                .given(ReqSpec.reqSpec)
-                .param("id", "2")
-                .get("/user")
+    public void testGetUserPositive() {
+        given().spec(ReqSpec.reqSpec)
+                .when()
+                .get("/user/{id}", 2)
                 .then().spec(ResSpec.resSpec())
-                .statusCode(404)
-                .extract().response();
+                .statusCode(200)
+                .body("id", equalTo(2));
+
     }
-
-
 }

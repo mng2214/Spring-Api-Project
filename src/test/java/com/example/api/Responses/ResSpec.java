@@ -13,6 +13,7 @@ public class ResSpec {
                 .expectContentType(ContentType.JSON)
                 .log(LogDetail.ALL)
                 .expectResponseTime(lessThan(5000L))
+                .expectStatusCode(200)
                 .build();
     }
 }

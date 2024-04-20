@@ -22,5 +22,5 @@ public class RandomData {
     long randomHours = random.nextInt(24);
 
     Instant instant = Instant.now().minus(randomDays, ChronoUnit.DAYS).minus(randomHours, ChronoUnit.HOURS);
-    LocalDateTime randomTimestamp = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    String randomTimestamp = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toString();
 }

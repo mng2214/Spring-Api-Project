@@ -56,7 +56,7 @@ public class TestExample {
         httpSampler.setProtocol("http");
         httpSampler.setDomain("localhost");
         httpSampler.setPort(8081);
-        httpSampler.setPath("/allusers");
+        httpSampler.setPath("/user/all");
         httpSampler.setMethod("GET");
         httpSampler.setProperty(TestElement.TEST_CLASS, HTTPSampler.class.getName());
         httpSampler.setProperty(TestElement.GUI_CLASS, HttpTestSampleGui.class.getName());
