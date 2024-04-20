@@ -50,10 +50,10 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User updatedFields) {
+    public User updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
         log.info("Original user: " + userService.findById(id));
-        log.info("Request body updates user: " + updatedFields);
-        User update = userService.update(id, updatedFields);
+        log.info("Request body updates user: " + updatedUser);
+        User update = userService.update(id, updatedUser);
         log.info("Saved and Updated user: " + update);
         return userService.findById(id);
     }
