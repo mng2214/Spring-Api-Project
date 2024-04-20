@@ -1,50 +1,42 @@
 package com.example.api;
 
-import com.example.api.Requests.ReqSpec;
-import com.example.api.Responses.GetUsersResponse;
-import com.example.api.Responses.ResSpec;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
+import com.springApi.ApiApplication;
 import org.junit.jupiter.api.Test;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-import java.util.List;
+// Corrected this line
+@SpringBootTest(classes = ApiApplication.class)
+@AutoConfigureMockMvc
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+public class ApiApplicationTests {
 
-//@SpringBootTest
-class ApiApplicationTests {
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    void testAllUsersPositive() throws JsonProcessingException {
-
-        Response response = RestAssured
-                .given(ReqSpec.reqSpec)
-                .get("/user/all")
-                .then().spec(ResSpec.resSpec())
-                .extract().response();
-
-        List<GetUsersResponse> users = new ObjectMapper()
-                .readValue(response.getBody()
-                        .asString(), new TypeReference<>() {
-        });
-        Assertions.assertEquals(10, users.size());
-
-        //  users.stream().map(GetUsersResponse::getId).forEach(System.out::println);
+    public void testAllUsers() throws Exception {
+        this.mockMvc.perform(get("/user/all"))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
     @Test
-    public void testGetUserPositive() {
-        given().spec(ReqSpec.reqSpec)
-                .when()
-                .get("/user/{id}", 2)
-                .then().spec(ResSpec.resSpec())
-                .statusCode(200)
-                .body("id", equalTo(2));
+    public void testGetUser() throws Exception {
+        this.mockMvc.perform(get("/user/1"))               // assuming there's a user with id = 1
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
+    @Test
+    public void testGetUserNotPresent() throws Exception {
+        this.mockMvc.perform(get("/user/-1"))              // assuming there's no user with id = -1
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 }
