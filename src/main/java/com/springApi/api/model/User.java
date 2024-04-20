@@ -3,8 +3,8 @@ package com.springApi.api.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.SneakyThrows;
+import org.springframework.beans.BeanUtils;
 
 @Data
 @Builder
@@ -17,6 +17,11 @@ public class User {
     private String email;
     private Address address;
     private String dateCreated;
+
+    @SneakyThrows
+    public void updateFields(User sourceUser) {
+        BeanUtils.copyProperties(sourceUser, this);
+    }
 
 }
 

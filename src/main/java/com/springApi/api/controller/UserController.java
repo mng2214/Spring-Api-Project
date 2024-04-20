@@ -1,16 +1,13 @@
 package com.springApi.api.controller;
 
 import com.springApi.api.model.User;
-import com.springApi.api.ApiResponse;
 import com.springApi.api.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -50,6 +47,15 @@ public class UserController {
         return (user == null)
                 ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
                 : ResponseEntity.ok(userService.deleteById(id));
+    }
+
+    @PutMapping("/update/{id}")
+    public User updateUser(@PathVariable Integer id, @RequestBody User updatedFields) {
+        log.info("Original user: " + userService.findById(id));
+        log.info("Request body updates user: " + updatedFields);
+        User update = userService.update(id, updatedFields);
+        log.info("Saved and Updated user: " + update);
+        return userService.findById(id);
     }
 
 
