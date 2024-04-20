@@ -1,10 +1,7 @@
-package com.example.springApi.service;
+package com.springApi.api;
 
-import com.example.springApi.api.model.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
