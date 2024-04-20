@@ -22,5 +22,9 @@ public abstract class AbstractService<T, ID> {
         return new ArrayList<>(map.values());
     }
 
+    T delete(ID id) {
+        return map.remove(id);
+    }
+
 
 }

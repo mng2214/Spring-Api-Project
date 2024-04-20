@@ -10,8 +10,8 @@ import java.util.List;
 public class UserServiceImpl extends AbstractService<User, Integer> implements UserService {
 
     @Override
-    public void save(User obj) {
-        super.save(obj.getId(), obj);
+    public User save(User obj) {
+        return super.save(obj.getId(), obj);
     }
 
     @Override
@@ -22,6 +22,11 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements U
     @Override
     public List<User> findAll() {
         return super.findAll();
+    }
+
+    @Override
+    public User deleteById(Integer id) {
+        return map.remove(id);
     }
 
 }
